@@ -87,7 +87,7 @@ out_img = np.copy(imgGrey)
 
 for m in range(0, h):
     for n in range(0, w):
-        out_img[m][n] = a[imgGrey[m][n)
+        out_img[m][n] = a[imgGrey[m][n]]
 
 cv2.imshow("no", out_img)
 
