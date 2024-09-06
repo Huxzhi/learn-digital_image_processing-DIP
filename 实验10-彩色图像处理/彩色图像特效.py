@@ -35,11 +35,25 @@ def 扩散处理(img):
 def 马赛克处理(img):
     dst = np.zeros(img.shape)
     h, w, s = img.shape
+    print(h, w, s)
+    for i in range(2, h-2, 5):
+        for j in range(2, w-2, 5):
+            for k in range(s):
+                dst[i-2:i+3, j-2:j+3,
+                    k] = np.full((5, 5), int(sum(map(sum, img[i-2:i+3, j-2:j+3, k])) / 25 + 0.5), dtype=np.uint8)
+
+    return np.uint8(dst)
+
+
+def 马赛克处理3(img):
+    dst = np.zeros(img.shape)
+    h, w, s = img.shape
+    print(h, w, s)
     for i in range(1, h-1, 3):
         for j in range(1, w-1, 3):
             for k in range(s):
                 dst[i-1:i+2, j-1:j+2,
-                    k] = np.full((3, 3), int(sum(sum(img[i-1:i+2, j-1:j+2, k])) / 9 + 4.5), dtype=np.uint8)
+                    k] = np.full((3, 3), int(sum(map(sum, img[i-1:i+2, j-1:j+2, k])) / 9 + 0.5), dtype=np.uint8)
 
     return np.uint8(dst)
 
@@ -79,11 +93,13 @@ def 霓虹处理(img):
     return np.uint8(dst)
 
 
-cv2.imshow("imgGreybaoguang", 曝光处理(img))
-cv2.imshow("imgGreykuosan", 扩散处理(img))
+cv2.imshow("imgGrey", img)
+# cv2.imshow("imgGreybaoguang", 曝光处理(img))
+# cv2.imshow("imgGreykuosan", 扩散处理(img))
 cv2.imshow("imgGreymasaike", 马赛克处理(img))
 cv2.imshow("imgGreymasaike2", 马赛克处理2(img))
-cv2.imshow("imgGreyfudiao", 浮雕处理(img))
-cv2.imshow("imgGreynihong", 霓虹处理(img))
+cv2.imshow("imgGreymasaike3", 马赛克处理3(img))
+# cv2.imshow("imgGreyfudiao", 浮雕处理(img))
+# cv2.imshow("imgGreynihong", 霓虹处理(img))
 
 cv2.waitKey()
