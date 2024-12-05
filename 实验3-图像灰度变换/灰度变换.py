@@ -18,7 +18,7 @@ def 彩色变灰色(img, con):
     (h, w, s) = img.shape
     print(img.shape)
     # 小坑，数组是引用，需要用复制方法制造二维数组，不然每一行都一样
-    arr = np.array([[0]*w]*h).astype("uint8")
+    arr = np.zeros(img.shape, dtype="uint8")
     print(arr)
     for i in range(w):
         for j in range(h):
